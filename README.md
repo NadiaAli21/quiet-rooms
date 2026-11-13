@@ -2,7 +2,7 @@
 
 > A cozy, zero-pressure virtual sanctuary and silent co-working space designed specifically for introverts.
 
-🔗 **Live Demo:** [https://nadiaali21.github.io/quiet-rooms/](https://nadiaali21.github.io/quiet-rooms/)
+🔗 **Live Demo:** [https://harmonious-gecko-5723c2.netlify.app](https://harmonious-gecko-5723c2.netlify.app)
 
 ---
 

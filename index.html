@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en" data-mood="gentle">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quiet Rooms — Alone Together</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=JetBrains+Mono:wght@400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-dot"></span>
+      <h1>Quiet Rooms</h1>
+      <span class="subtitle">alone together</span>
+    </div>
+
+    <div class="room-switcher" role="tablist" aria-label="Choose a room">
+      <button class="room-pill active" data-room="library">Midnight Rain Library</button>
+      <button class="room-pill" data-room="tea">Warm Tea Corner</button>
+      <button class="room-pill" data-room="desk">Quiet Coding Desk</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <!-- LEFT COLUMN: Identity, Social Battery & Ambient Mixer -->
+    <section class="panel left-panel">
+      <div class="card identity-card">
+        <div class="card-header">
+          <span class="eyebrow">Your Desk Presence</span>
+          <button id="reroll-alias" class="icon-btn" title="New cozy alias">↻</button>
+        </div>
+
+        <div class="profile-row">
+          <button id="avatar-btn" class="avatar-badge" title="Click to change icon">🦊</button>
+          <div class="alias-group">
+            <input id="alias-input" type="text" maxlength="20" value="QuietFox" aria-label="Your alias" />
+            <span class="privacy-note">No camera · No mic · No account</span>
+          </div>
+        </div>
+
+        <div class="status-pills" id="status-pills">
+          <button class="tag active" data-status="Deep Focus">Deep Focus</button>
+          <button class="tag" data-status="Coding">Coding</button>
+          <button class="tag" data-status="Designing">Designing</button>
+          <button class="tag" data-status="Reading">Reading</button>
+          <button class="tag" data-status="Sipping Tea">Sipping Tea</button>
+        </div>
+
+        <div class="battery-box">
+          <div class="battery-header">
+            <label for="battery-slider">Social Battery</label>
+            <span id="battery-label" class="battery-value">50% · Gentle Company</span>
+          </div>
+          <input id="battery-slider" type="range" min="10" max="100" step="10" value="50" />
+          <p id="mood-hint" class="mood-hint">Balanced warmth. Whisper chat unlocks during breaks.</p>
+        </div>
+      </div>
+
+      <div class="card audio-card">
+        <div class="card-header">
+          <span class="eyebrow">Ambient Soundboard</span>
+          <button id="mute-all-btn" class="text-btn">Mute all</button>
+        </div>
+
+        <div class="sound-list">
+          <div class="sound-row">
+            <div class="sound-info">
+              <span>Gentle Rain</span>
+              <span class="sound-val" id="val-rain">0%</span>
+            </div>
+            <input type="range" class="sound-slider" data-sound="rain" min="0" max="100" value="0" />
+          </div>
+
+          <div class="sound-row">
+            <div class="sound-info">
+              <span>Warm Hearth</span>
+              <span class="sound-val" id="val-hearth">0%</span>
+            </div>
+            <input type="range" class="sound-slider" data-sound="hearth" min="0" max="100" value="0" />
+          </div>
+
+          <div class="sound-row">
+            <div class="sound-info">
+              <span>Deep Brown Hum</span>
+              <span class="sound-val" id="val-hum">0%</span>
+            </div>
+            <input type="range" class="sound-slider" data-sound="hum" min="0" max="100" value="0" />
+          </div>
+
+          <div class="sound-row">
+            <div class="sound-info">
+              <span>Midnight Pad</span>
+              <span class="sound-val" id="val-pad">0%</span>
+            </div>
+            <input type="range" class="sound-slider" data-sound="pad" min="0" max="100" value="0" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CENTER COLUMN: Focus Timer & Private Scratchpad -->
+    <section class="panel center-panel">
+      <div class="card timer-card">
+        <span id="room-vibe-title" class="room-vibe">Midnight Rain Library · Quiet Focus</span>
+
+        <div class="timer-display-wrap">
+          <svg class="progress-ring" width="230" height="230" viewBox="0 0 230 230">
+            <circle class="ring-bg" cx="115" cy="115" r="102" />
+            <circle id="ring-progress" class="ring-fg" cx="115" cy="115" r="102" />
+          </svg>
+          <div class="timer-center">
+            <div id="timer-readout" class="timer-readout">25:00</div>
+            <div id="timer-phase" class="timer-phase">Focus Session</div>
+          </div>
+        </div>
+
+        <div class="preset-row">
+          <button class="preset-btn active" data-mins="25">25m Flow</button>
+          <button class="preset-btn" data-mins="50">50m Deep</button>
+          <button class="preset-btn" data-mins="10">10m Break</button>
+        </div>
+
+        <div class="timer-controls">
+          <button id="start-pause-btn" class="primary-btn">Start Quiet Session</button>
+          <button id="reset-timer-btn" class="secondary-btn">Reset</button>
+        </div>
+      </div>
+
+      <div class="card scratchpad-card">
+        <div class="card-header">
+          <span class="eyebrow">Private Mind-Dump (Saved Locally)</span>
+          <span id="save-indicator" class="save-badge">Saved</span>
+        </div>
+        <textarea id="scratchpad" placeholder="Park distracting thoughts, tiny next steps, or half-formed ideas here. Nothing leaves your browser..."></textarea>
+      </div>
+    </section>
+
+    <!-- RIGHT COLUMN: Parallel Company & Whisper Chat -->
+    <section class="panel right-panel">
+      <div class="card presence-card">
+        <div class="card-header">
+          <span class="eyebrow">Quiet Company (<span id="room-count">5</span>)</span>
+          <span class="subtle-tip">Click ✦ to send a silent glow</span>
+        </div>
+        <ul id="roommates-list" class="roommates-list"></ul>
+      </div>
+
+      <div class="card whisper-card">
+        <div class="card-header">
+          <span class="eyebrow">5-Min Break Whisper</span>
+          <span id="chat-lock-badge" class="lock-badge">Locked during focus</span>
+        </div>
+
+        <div id="whisper-feed" class="whisper-feed">
+          <div class="whisper-empty">
+            Chat rests while the focus timer runs so everyone can stay in flow. Switch to a Break or toggle preview below.
+          </div>
+        </div>
+
+        <form id="whisper-form" class="whisper-form">
+          <input id="whisper-input" type="text" maxlength="140" placeholder="Break chat is resting..." disabled />
+          <button id="whisper-send" type="submit" disabled>Send</button>
+        </form>
+        <button id="toggle-break-preview" class="text-btn small-link">Preview break chat mode</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
